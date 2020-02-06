@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 export interface Post {
   title: string;
   text: string;
-  id?: number;
+  id?: string;
 }
 
 @Component({
@@ -13,11 +13,15 @@ export interface Post {
 })
 export class AppComponent {
   posts: Post[] = [
-    { title: 'Post 1', text: 'text...', id: 1},
-    { title: 'Post 2', text: 'text...', id: 2}
+    { title: 'Post 1', text: 'text...', id: '1'},
+    { title: 'Post 2', text: 'text...', id: '2'}
   ];
 
   updatePosts(post: Post) {
     this.posts.unshift(post);
+  }
+
+  removePost(id: string) {
+    this.posts = this.posts.filter((post: Post) => post.id !== id);
   }
 }

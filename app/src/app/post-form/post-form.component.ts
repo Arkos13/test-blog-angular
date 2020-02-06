@@ -24,7 +24,8 @@ export class PostFormComponent implements OnInit {
     if (this.text.trim() && this.title.trim()) {
       const post: Post = {
         title: this.title,
-        text: this.text
+        text: this.text,
+        id: `f${(~~(Math.random()*1e8)).toString(16)}`
       };
       this.onAdd.emit(post);
       this.title = this.text = '';

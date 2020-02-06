@@ -5,6 +5,7 @@
   ></app-post-form>
   <hr/>
   <app-post
+    (onRemove)="removePost($event)"
     *ngFor="let post of posts"
     [post]="post"
   >
