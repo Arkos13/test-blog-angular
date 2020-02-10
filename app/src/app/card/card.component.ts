@@ -33,6 +33,7 @@ export class CardComponent implements OnInit {
   submit() {
     const formData = {...this.formCard.value};
     console.log(formData);
+    this.formCard.reset();
   }
 
   setCapital() {
