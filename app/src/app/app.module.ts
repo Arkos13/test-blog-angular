@@ -6,19 +6,23 @@ import { PostFormComponent } from './post-form/post-form.component';
 import { PostComponent } from './post/post.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CardComponent } from './card/card.component';
+import { CardHttpClientComponent } from './card-http-client/card-http-client.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostFormComponent,
     PostComponent,
-    CardComponent
+    CardComponent,
+    CardHttpClientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
