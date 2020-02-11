@@ -14,6 +14,8 @@ export class CardHttpClientComponent implements OnInit {
 
   todoTitle = "";
 
+  error = "";
+
   constructor(private todoService: TodosService) { }
 
   ngOnInit() {
@@ -41,6 +43,8 @@ export class CardHttpClientComponent implements OnInit {
       .subscribe(response => {
         this.todos = response;
         this.loading = false;
+      }, error => {
+        this.error = error.message;
       });
   }
 
