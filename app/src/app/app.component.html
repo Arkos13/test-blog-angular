@@ -1,19 +1,22 @@
+<nav class="navbar">
+  <h1>
+    <a routerLink="/">Angular Routing</a>
+  </h1>
+  <ul>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <a routerLink="/">Home</a>
+    </li>
+    <li routerLinkActive="active"><a routerLink="/posts">Posts</a></li>
+    <li routerLinkActive="active"><a routerLink="/about">About</a></li>
+    <li><button class="btn">Login</button></li>
+    <li><button class="btn">Logout</button></li>
+  </ul>
+</nav>
+
 <div class="container">
-  <h1>Angular component</h1>
-  <app-post-form
-    (onAdd)="updatePosts($event)"
-  ></app-post-form>
-  <hr/>
-  <app-post
-    (onRemove)="removePost($event)"
-    *ngFor="let post of posts"
-    [post]="post"
-  >
-    <small *ngIf="post.text.length > 10; else short">Пост длинный</small>
-    <ng-template #short>
-      <small>Пост короткий</small>
-    </ng-template>
-  </app-post>
-  <hr/>
-  <app-card-http-client></app-card-http-client>
+  <div class="card">
+    <router-outlet></router-outlet>
+  </div>
 </div>
+
+
