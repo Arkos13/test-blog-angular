@@ -3,6 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
 import {PostsComponent} from './posts/posts.component';
+import {PostComponent} from './post/post.component';
+import {AboutExtraComponent} from './about-extra/about-extra.component';
+import {ErrorPageComponent} from './error-page/error-page.component';
+import {AuthGuard} from './auth.guard';
+import {PostResolver} from './post.resolver';
 
 
 const routes: Routes = [
@@ -12,11 +17,35 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'extra',
+        component: AboutExtraComponent
+      }
+    ]
   },
   {
     path: 'posts',
-    component: PostsComponent
+    component: PostsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'posts/:id',
+    component: PostComponent,
+    canActivate: [AuthGuard],
+    resolve: {
+      post: PostResolver
+    }
+  },
+  {
+    path: 'error',
+    component: ErrorPageComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'error'
   }
 ];
 
