@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserInterface} from '../../shared/interdaces/user.interface';
+import {AuthService} from '../shared/services/auth.service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -10,10 +12,21 @@ import {UserInterface} from '../../shared/interdaces/user.interface';
 export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
+  submitted: boolean = false;
+  message: string;
 
-  constructor() { }
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['loginAgain']) {
+        this.message = 'Введите данные';
+      }
+    });
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.email,
@@ -30,9 +43,18 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    this.submitted = true;
     const user: UserInterface = {
       email: this.form.value.email,
-      password: this.form.value.password
+      password: this.form.value.password,
+      returnSecureToken: true
     };
+    this.auth.login(user).subscribe(() => {
+      this.form.reset();
+      this.router.navigate(['/admin', 'dashboard']);
+      this.submitted = false;
+    }, () => {
+      this.submitted = false;
+    });
   }
 }
