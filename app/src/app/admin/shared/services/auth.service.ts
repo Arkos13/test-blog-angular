@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {UserInterface} from '../../../shared/interdaces/user.interface';
+import {UserInterface} from '../../../shared/interfaces/user.interface';
 import {Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {catchError, tap} from 'rxjs/operators';
-import {FbAuthResponseInterface} from '../../../shared/interdaces/fb-auth-response.interface';
+import {FbAuthResponseInterface} from '../../../shared/interfaces/fb-auth-response.interface';
 
 @Injectable()
 export class AuthService {
